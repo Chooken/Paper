@@ -1,5 +1,9 @@
 SandPaper is a specialised fork of Paper which removes the gravity block duplication fix from paper.
 
+It was for a personal server and i did not find any up to date options on the internet easily so here we are.
+
+Don't expect it too be updated everyday, will try my hardest to update atleast once a week.
+
 
 Paper ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/PaperMC/Paper/Build%20Paper/master)
 ===========
