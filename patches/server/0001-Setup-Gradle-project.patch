@@ -20,10 +20,10 @@ index 67fb370cad6924895a6b27052dbd5c1767e3f0c9..3e05459f27c4c5697ae65da504d67a6a
  /.project
 diff --git a/build.gradle.kts b/build.gradle.kts
 new file mode 100644
-index 0000000000000000000000000000000000000000..e9db6b3bad237c0b3fdb14e96b6f0f29ba8ee312
+index 0000000000000000000000000000000000000000..e76b9f9012c7ba7253f455fa92b3891737f4ffd3
 --- /dev/null
 +++ b/build.gradle.kts
-@@ -0,0 +1,135 @@
+@@ -0,0 +1,145 @@
 +import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer
 +import com.github.jengelman.gradle.plugins.shadow.transformers.Transformer
 +import io.papermc.paperweight.util.Git
@@ -127,6 +127,13 @@ index 0000000000000000000000000000000000000000..e9db6b3bad237c0b3fdb14e96b6f0f29
 +    workingDir = rootProject.layout.projectDirectory.dir(
 +        providers.gradleProperty("runWorkDir").forUseAtConfigurationTime().orElse("run")
 +    ).get().asFile
++
++    if (rootProject.childProjects["test-plugin"] != null) {
++        val testPluginJar = rootProject.project(":test-plugin").tasks.jar.flatMap { it.archiveFile }
++        inputs.file(testPluginJar)
++        args("-add-plugin=${testPluginJar.get().asFile.absolutePath}")
++    }
++
 +    args("--nogui")
 +    systemProperty("net.kyori.adventure.text.warnWhenLegacyFormattingDetected", true)
 +    if (project.hasProperty("disableWatchdog")) {
@@ -135,6 +142,9 @@ index 0000000000000000000000000000000000000000..e9db6b3bad237c0b3fdb14e96b6f0f29
 +    doFirst {
 +        workingDir.mkdirs()
 +    }
++    javaLauncher.set(project.javaToolchains.launcherFor {
++        languageVersion.set(JavaLanguageVersion.of(project.tasks.compileJava.get().options.release.get()))
++    })
 +    block(this)
 +}
 +
@@ -161,7 +171,7 @@ index 0000000000000000000000000000000000000000..e9db6b3bad237c0b3fdb14e96b6f0f29
 +}
 diff --git a/pom.xml b/pom.xml
 deleted file mode 100644
-index 2f0e513c9e5d78a22e7d1e1a5aa64bb8f0f360d2..0000000000000000000000000000000000000000
+index 9dafd60b6dcabf203ee6d60c0ea82d2845b9eec7..0000000000000000000000000000000000000000
 --- a/pom.xml
 +++ /dev/null
 @@ -1,472 +0,0 @@
@@ -171,7 +181,7 @@ index 2f0e513c9e5d78a22e7d1e1a5aa64bb8f0f360d2..00000000000000000000000000000000
 -    <groupId>org.spigotmc</groupId>
 -    <artifactId>spigot</artifactId>
 -    <packaging>jar</packaging>
--    <version>1.17-R0.1-SNAPSHOT</version>
+-    <version>1.17.1-R0.1-SNAPSHOT</version>
 -    <name>Spigot</name>
 -    <url>https://www.spigotmc.org/</url>
 -
@@ -516,7 +526,7 @@ index 2f0e513c9e5d78a22e7d1e1a5aa64bb8f0f360d2..00000000000000000000000000000000
 -                    <dependency>
 -                        <groupId>org.eclipse.jdt</groupId>
 -                        <artifactId>ecj</artifactId>
--                        <version>3.24.0</version>
+-                        <version>3.26.0</version>
 -                    </dependency>
 -                </dependencies>
 -            </plugin>
@@ -552,7 +562,7 @@ index 2f0e513c9e5d78a22e7d1e1a5aa64bb8f0f360d2..00000000000000000000000000000000
 -                    <plugin>
 -                        <groupId>org.apache.maven.plugins</groupId>
 -                        <artifactId>maven-checkstyle-plugin</artifactId>
--                        <version>3.1.1</version>
+-                        <version>3.1.2</version>
 -                        <executions>
 -                            <execution>
 -                                <phase>process-classes</phase>
@@ -569,7 +579,7 @@ index 2f0e513c9e5d78a22e7d1e1a5aa64bb8f0f360d2..00000000000000000000000000000000
 -                            <dependency>
 -                                <groupId>com.puppycrawl.tools</groupId>
 -                                <artifactId>checkstyle</artifactId>
--                                <version>8.39</version>
+-                                <version>8.44</version>
 -                            </dependency>
 -                        </dependencies>
 -                    </plugin>
