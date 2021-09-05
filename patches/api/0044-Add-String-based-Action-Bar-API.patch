@@ -5,7 +5,7 @@ Subject: [PATCH] Add String based Action Bar API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index e72e3adc5783a268e74c09c689be57db8b7df7e2..88cfc75a7b55dd09c4577d61ac40c3e241fc9e6c 100644
+index bbdcb00642d6d91787f0c4184434de15b0e31646..638e106375a4be5bd49ddbe8ce32b1c4eeb32800 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -3,6 +3,7 @@ package org.bukkit.entity;
@@ -16,7 +16,7 @@ index e72e3adc5783a268e74c09c689be57db8b7df7e2..88cfc75a7b55dd09c4577d61ac40c3e2
  import org.bukkit.DyeColor;
  import org.bukkit.Effect;
  import org.bukkit.GameMode;
-@@ -643,6 +644,39 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -712,6 +713,39 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
      public void sendMap(@NotNull MapView map);
  
      // Paper start
@@ -56,7 +56,7 @@ index e72e3adc5783a268e74c09c689be57db8b7df7e2..88cfc75a7b55dd09c4577d61ac40c3e2
      /**
       * Sends the component to the player
       *
-@@ -670,9 +704,11 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -739,9 +773,11 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
      /**
       * Sends an array of components as a single message to the specified screen position of this player
       *
@@ -68,7 +68,7 @@ index e72e3adc5783a268e74c09c689be57db8b7df7e2..88cfc75a7b55dd09c4577d61ac40c3e2
      public default void sendMessage(net.md_5.bungee.api.ChatMessageType position, net.md_5.bungee.api.chat.BaseComponent... components) {
          spigot().sendMessage(position, components);
      }
-@@ -1755,6 +1791,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -1922,6 +1958,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
          /**
           * Sends the component to the specified screen position of this player
           *
@@ -76,7 +76,7 @@ index e72e3adc5783a268e74c09c689be57db8b7df7e2..88cfc75a7b55dd09c4577d61ac40c3e2
           * @param position the screen position
           * @param component the components to send
           * @deprecated use {@code sendMessage} methods that accept {@link net.kyori.adventure.text.Component}
-@@ -1767,6 +1804,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -1934,6 +1971,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
          /**
           * Sends an array of components as a single message to the specified screen position of this player
           *

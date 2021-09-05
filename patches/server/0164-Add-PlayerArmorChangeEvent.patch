@@ -5,7 +5,7 @@ Subject: [PATCH] Add PlayerArmorChangeEvent
 
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 489ce149e1922ef4bd09716dee079c0cc5aa1de2..4da63e5c35b1736f2d55713b39b64cc31ecbc9c9 100644
+index d9503597b2c2707bf28b31db9c1099fd326d2451..2c68fb49040dcb1b6acead188fa9094180577aa7 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -1,5 +1,6 @@

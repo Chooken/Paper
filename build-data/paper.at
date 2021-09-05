@@ -19,9 +19,6 @@ public org.spigotmc.SpigotWorldConfig getList(Ljava/lang/String;Ljava/lang/Objec
 public org.spigotmc.SpigotWorldConfig getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
 # MC Utils
-public net.minecraft.core.Vec3i setX(I)Lnet/minecraft/core/Vec3i;
-public net.minecraft.core.Vec3i setY(I)Lnet/minecraft/core/Vec3i;
-public net.minecraft.core.Vec3i setZ(I)Lnet/minecraft/core/Vec3i;
 public net.minecraft.server.level.ServerChunkCache mainThread
 public net.minecraft.server.level.ServerLevel chunkSource
 public org.bukkit.craftbukkit.inventory.CraftItemStack handle
@@ -113,6 +110,7 @@ public net.minecraft.server.level.ChunkMap mainThreadMailbox # todo one of these
 
 # Optimise TickListServer
 public net.minecraft.world.level.ServerTickList saveTickList(Ljava/util/function/Function;Ljava/lang/Iterable;J)Lnet/minecraft/nbt/ListTag;
+public net.minecraft.world.level.chunk.storage.EntityStorage level
 
 # Don't move existing players to world spawn
 public net.minecraft.server.level.ServerPlayer fudgeSpawnLocation(Lnet/minecraft/server/level/ServerLevel;)V
@@ -140,6 +138,7 @@ public net.minecraft.world.entity.Entity isInBubbleColumn()Z
 
 # Allow delegation to vanilla chunk gen
 public org.bukkit.craftbukkit.generator.CustomChunkGenerator delegate
+private-f org.bukkit.craftbukkit.generator.CraftChunkData sections
 
 # Optimize redstone algorithm
 public net.minecraft.world.level.block.RedStoneWireBlock shouldSignal
@@ -231,3 +230,10 @@ public net.minecraft.world.level.entity.PersistentEntitySectionManager sectionSt
 
 # Optimize light engine
 public-f net.minecraft.world.level.chunk.DataLayer
+
+# Add methods to get translation keys
+public org.bukkit.craftbukkit.inventory.CraftMetaFirework
+public org.bukkit.craftbukkit.inventory.CraftMetaFirework getNBT(Lorg/bukkit/FireworkEffect$Type;)I
+
+# Vanilla command permission fixes
+public-f com.mojang.brigadier.tree.CommandNode requirement

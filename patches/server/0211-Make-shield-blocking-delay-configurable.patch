@@ -5,10 +5,10 @@ Subject: [PATCH] Make shield blocking delay configurable
 
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-index a0a846a2e60bdc17537bd697137f65321c1a61d8..e1110274a9f6b8f7007537732ec8eff7e72040ee 100644
+index 10f7437d62bfa774309d6334ca791505254bcaf7..6d2d82c24c9f43fab2cddee03960325c15708a58 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-@@ -363,4 +363,9 @@ public class PaperWorldConfig {
+@@ -368,4 +368,9 @@ public class PaperWorldConfig {
          disableEnderpearlExploit = getBoolean("game-mechanics.disable-unloaded-chunk-enderpearl-exploit", disableEnderpearlExploit);
          log("Disable Unloaded Chunk Enderpearl Exploit: " + (disableEnderpearlExploit ? "enabled" : "disabled"));
      }
@@ -19,7 +19,7 @@ index a0a846a2e60bdc17537bd697137f65321c1a61d8..e1110274a9f6b8f7007537732ec8eff7
 +    }
  }
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 4da63e5c35b1736f2d55713b39b64cc31ecbc9c9..848a000d7a959e161011b21012e5d9c438b55455 100644
+index 2c68fb49040dcb1b6acead188fa9094180577aa7..3be95347badafc35990f5fbb1c0be77b8702bc64 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -3668,12 +3668,24 @@ public abstract class LivingEntity extends Entity {
@@ -49,10 +49,10 @@ index 4da63e5c35b1736f2d55713b39b64cc31ecbc9c9..848a000d7a959e161011b21012e5d9c4
          return this.isShiftKeyDown();
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index 7beb84da34e58b18cd83a53eab2bcf703e8bf35e..d9f06a7ff7c6b4c60ddbc5d7131916fabd0fc4d2 100644
+index 90b70935242757b5c302bac7777eb1428d69619e..1ffdc8785d1073511e58d4826457efa9d71c357d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-@@ -712,5 +712,15 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -735,5 +735,15 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
      public void setArrowsStuck(int arrows) {
          getHandle().setArrowCount(arrows);
      }

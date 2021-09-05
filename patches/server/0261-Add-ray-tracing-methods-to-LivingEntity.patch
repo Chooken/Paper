@@ -28,7 +28,7 @@ index 49fd3486a6c595749f33bbe1c1bec0454e4725c5..5c290f263fc2b643987c96ea75729bf1
          switch (enumDirection) {
              case DOWN:
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index ab34cf7d603ba0fd8624db821b2c0e9e22286c63..9c2a6fd75f4380230256d9de91082d1bfe2eb961 100644
+index bfec0ae49c74ec5f6762140199cbfaf9e87a047c..4bc467f5c0fd261a01fd4ecc49015b6e7d6b6ef9 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -3689,6 +3689,23 @@ public abstract class LivingEntity extends Entity {
@@ -56,10 +56,10 @@ index ab34cf7d603ba0fd8624db821b2c0e9e22286c63..9c2a6fd75f4380230256d9de91082d1b
  
      public int getShieldBlockingDelay() {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index 0aec2e79d053b6cb845ffea393ad431b3d254b83..05e962ed9269db4cfa170960507b10d7b7d13741 100644
+index 918f87cc79062602e1db41d9368921c0092b1840..873b70c36d145a14632102c9e92d501745064fa4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-@@ -190,6 +190,28 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -198,6 +198,28 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
          return blocks.get(0);
      }
  

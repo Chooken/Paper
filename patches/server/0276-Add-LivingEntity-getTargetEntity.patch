@@ -5,7 +5,7 @@ Subject: [PATCH] Add LivingEntity#getTargetEntity
 
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 76ebd1c85fed688ad42ea5f709638015e965cec6..24d53ec5a4dc49c6489cf8007197ed11381081e3 100644
+index 82d6d56d6e1bc6f98811a4a9b2a9d80a62c61292..1c97ba35c9588b98d66e82ca83e4c48615b9e01b 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -116,6 +116,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
@@ -56,7 +56,7 @@ index 76ebd1c85fed688ad42ea5f709638015e965cec6..24d53ec5a4dc49c6489cf8007197ed11
  
      public int getShieldBlockingDelay() {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index 05e962ed9269db4cfa170960507b10d7b7d13741..e2e76c5de41666ef3a7132e376a3e4257bb13109 100644
+index 873b70c36d145a14632102c9e92d501745064fa4..c396ad36084e46c4b812d970e07a9188aed16daf 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 @@ -1,5 +1,6 @@
@@ -66,7 +66,7 @@ index 05e962ed9269db4cfa170960507b10d7b7d13741..e2e76c5de41666ef3a7132e376a3e425
  import com.google.common.base.Preconditions;
  import com.google.common.collect.Sets;
  import java.util.ArrayList;
-@@ -210,6 +211,33 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -218,6 +219,33 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
              new com.destroystokyo.paper.block.TargetBlockInfo(org.bukkit.craftbukkit.block.CraftBlock.at(getHandle().level, ((net.minecraft.world.phys.BlockHitResult)rayTrace).getBlockPos()),
                  net.minecraft.server.MCUtil.toBukkitBlockFace(((net.minecraft.world.phys.BlockHitResult)rayTrace).getDirection()));
      }

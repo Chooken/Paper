@@ -6,10 +6,10 @@ Subject: [PATCH] Add configuration option to prevent player names from being
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index e266a6ea144ee12f00b385b12a0fb99403643898..35dbed257032f797484c2e7db49339c0325246f6 100644
+index fd7ac75f545810c5c85b231639483b30da373e6e..02045103fc776a149cd05a779461acb6164b656f 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -1792,6 +1792,16 @@ public final class Bukkit {
+@@ -1847,6 +1847,16 @@ public final class Bukkit {
      public static boolean reloadCommandAliases() {
          return server.reloadCommandAliases();
      }
@@ -27,10 +27,10 @@ index e266a6ea144ee12f00b385b12a0fb99403643898..35dbed257032f797484c2e7db49339c0
  
      @NotNull
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 7b7d5483e58548ea28fc572916ca3e26571a8668..39b5de22629880bb35e1fb1bb01f3e42693462f5 100644
+index 075573b2ba144752cdee270c9d599b8bc0972df0..1d13a4c289e6a764b3b080455a86e17a5e60929e 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -1573,4 +1573,14 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
+@@ -1624,4 +1624,14 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
      void reloadPermissions(); // Paper
  
      boolean reloadCommandAliases(); // Paper

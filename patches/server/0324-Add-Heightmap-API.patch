@@ -5,10 +5,10 @@ Subject: [PATCH] Add Heightmap API
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index be4c05259f176e9ef5c25db2b1745df5ea4d5789..ea587597bfb205531c03eb0c0c9bde31ea6ab53b 100644
+index 4edfe886ae753f1c9e90be2bff69483c330287ae..ef9779a35d6102b5977dda0c68d4ca311d7298ad 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-@@ -342,6 +342,29 @@ public class CraftWorld implements World {
+@@ -202,6 +202,29 @@ public class CraftWorld extends CraftRegionAccessor implements World {
          return this.getHighestBlockYAt(x, z, org.bukkit.HeightMap.MOTION_BLOCKING);
      }
  

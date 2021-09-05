@@ -5,7 +5,7 @@ Subject: [PATCH] AnvilDamageEvent
 
 
 diff --git a/src/main/java/net/minecraft/world/inventory/AnvilMenu.java b/src/main/java/net/minecraft/world/inventory/AnvilMenu.java
-index 6a9597572714706052103677bfb6142a5be2e134..1dad9577370bb58b27b32b997a505ce5145a6769 100644
+index 6acd18521bde95183bf3910328559a2a5829c03d..2ed4930648411ccd52fc970b069e57eba9bceef8 100644
 --- a/src/main/java/net/minecraft/world/inventory/AnvilMenu.java
 +++ b/src/main/java/net/minecraft/world/inventory/AnvilMenu.java
 @@ -90,6 +90,16 @@ public class AnvilMenu extends ItemCombinerMenu {

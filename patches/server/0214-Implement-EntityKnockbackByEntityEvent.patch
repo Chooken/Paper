@@ -6,7 +6,7 @@ Subject: [PATCH] Implement EntityKnockbackByEntityEvent
 This event is called when an entity receives knockback by another entity.
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 848a000d7a959e161011b21012e5d9c438b55455..ab34cf7d603ba0fd8624db821b2c0e9e22286c63 100644
+index 3be95347badafc35990f5fbb1c0be77b8702bc64..bfec0ae49c74ec5f6762140199cbfaf9e87a047c 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -1437,7 +1437,7 @@ public abstract class LivingEntity extends Entity {
@@ -56,10 +56,10 @@ index 848a000d7a959e161011b21012e5d9c438b55455..ab34cf7d603ba0fd8624db821b2c0e9e
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 6b18d4dd869b442f06a7e9ae690edd5ff5227cbb..e9e89608c4b77868fed92717c837db76d6bb5a54 100644
+index 4f3613e8232df3b4d9e10970b9faf9fbdd3b34a2..6e5682fed08a41c7e573e6611fca93bf85019b9f 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
-@@ -1533,7 +1533,7 @@ public abstract class Mob extends LivingEntity {
+@@ -1537,7 +1537,7 @@ public abstract class Mob extends LivingEntity {
  
          if (flag) {
              if (f1 > 0.0F && target instanceof LivingEntity) {
@@ -68,11 +68,24 @@ index 6b18d4dd869b442f06a7e9ae690edd5ff5227cbb..e9e89608c4b77868fed92717c837db76
                  this.setDeltaMovement(this.getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
              }
  
+diff --git a/src/main/java/net/minecraft/world/entity/ai/behavior/RamTarget.java b/src/main/java/net/minecraft/world/entity/ai/behavior/RamTarget.java
+index f6fd39823f04f8071c616d40a838b01e7159c5a1..e1cdf3ce38404d3f40be59e4cd3ad2b997d63310 100644
+--- a/src/main/java/net/minecraft/world/entity/ai/behavior/RamTarget.java
++++ b/src/main/java/net/minecraft/world/entity/ai/behavior/RamTarget.java
+@@ -75,7 +75,7 @@ public class RamTarget<E extends PathfinderMob> extends Behavior<E> {
+             float f = 0.25F * (float)(i - j);
+             float g = Mth.clamp(pathfinderMob.getSpeed() * 1.65F, 0.2F, 3.0F) + f;
+             float h = livingEntity.isDamageSourceBlocked(DamageSource.mobAttack(pathfinderMob)) ? 0.5F : 1.0F;
+-            livingEntity.knockback((double)(h * g) * this.getKnockbackForce.applyAsDouble(pathfinderMob), this.ramDirection.x(), this.ramDirection.z());
++            livingEntity.knockback((double)(h * g) * this.getKnockbackForce.applyAsDouble(pathfinderMob), this.ramDirection.x(), this.ramDirection.z(), pathfinderMob); // Paper
+             this.finishRam(serverLevel, pathfinderMob);
+             serverLevel.playSound((Player)null, pathfinderMob, this.getImpactSound.apply(pathfinderMob), SoundSource.HOSTILE, 1.0F, 1.0F);
+         } else {
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index ce8b5394f418583608bb8965c058660264ddf66c..3db5b3adb9fe4a1682b0a4e75ae3e1f6febb7822 100644
+index 157abba796981cf2d1b0b17ccd376de10c782a30..72b7c6654c68daa2591d55ff62d4a6ba7ae25618 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
-@@ -1230,7 +1230,7 @@ public abstract class Player extends LivingEntity {
+@@ -1232,7 +1232,7 @@ public abstract class Player extends LivingEntity {
                      if (flag5) {
                          if (i > 0) {
                              if (target instanceof LivingEntity) {
@@ -81,7 +94,7 @@ index ce8b5394f418583608bb8965c058660264ddf66c..3db5b3adb9fe4a1682b0a4e75ae3e1f6
                              } else {
                                  target.push((double) (-Mth.sin(this.getYRot() * 0.017453292F) * (float) i * 0.5F), 0.1D, (double) (Mth.cos(this.getYRot() * 0.017453292F) * (float) i * 0.5F));
                              }
-@@ -1254,7 +1254,7 @@ public abstract class Player extends LivingEntity {
+@@ -1256,7 +1256,7 @@ public abstract class Player extends LivingEntity {
                                  if (entityliving != this && entityliving != target && !this.isAlliedTo(entityliving) && (!(entityliving instanceof ArmorStand) || !((ArmorStand) entityliving).isMarker()) && this.distanceToSqr((Entity) entityliving) < 9.0D) {
                                      // CraftBukkit start - Only apply knockback if the damage hits
                                      if (entityliving.hurt(DamageSource.playerAttack(this).sweep(), f4)) {

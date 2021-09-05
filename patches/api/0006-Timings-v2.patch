@@ -1684,7 +1684,7 @@ index 0000000000000000000000000000000000000000..f7c2245a310a084367ff25db539b3c96
 +}
 diff --git a/src/main/java/co/aikar/timings/TimingsManager.java b/src/main/java/co/aikar/timings/TimingsManager.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..ef824d701c97cad8b31e76ad98c94fc4367a7eda
+index 0000000000000000000000000000000000000000..a92925d41110226f7fda055b71ce7be60eedd038
 --- /dev/null
 +++ b/src/main/java/co/aikar/timings/TimingsManager.java
 @@ -0,0 +1,188 @@
@@ -1722,7 +1722,6 @@ index 0000000000000000000000000000000000000000..ef824d701c97cad8b31e76ad98c94fc4
 +import org.bukkit.plugin.java.PluginClassLoader;
 +
 +import java.util.ArrayList;
-+import java.util.Collections;
 +import java.util.List;
 +import java.util.Map;
 +import java.util.concurrent.ConcurrentHashMap;
@@ -1737,6 +1736,7 @@ index 0000000000000000000000000000000000000000..ef824d701c97cad8b31e76ad98c94fc4
 +    public static final FullServerTickHandler FULL_SERVER_TICK = new FullServerTickHandler();
 +    public static final TimingHandler TIMINGS_TICK = Timings.ofSafe("Timings Tick", FULL_SERVER_TICK);
 +    public static final Timing PLUGIN_GROUP_HANDLER = Timings.ofSafe("Plugins");
++    public static String url = "https://timings.aikar.co/";
 +    public static List<String> hiddenConfigs = new ArrayList<String>();
 +    public static boolean privacy = false;
 +
@@ -2782,7 +2782,7 @@ index 0000000000000000000000000000000000000000..5989ee21297935651b0edd44b8239e65
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 7305bbe87f010b2f6fa483c215c9c2aa9dc14bda..73dafe6093b4c5c385efc8529fab76189085e9d0 100644
+index de23baef8a0902956ef4f35dd74744fca8dc6fce..1d54b48250cd8313719c301a2770358a61d9d152 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -673,7 +673,6 @@ public final class Bukkit {
@@ -2794,10 +2794,10 @@ index 7305bbe87f010b2f6fa483c215c9c2aa9dc14bda..73dafe6093b4c5c385efc8529fab7618
  
      /**
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index db3af8134c817d9bb8bb44bd717fafa733cc2708..b72a8d2ca0c5b6d78c0a5ca5cc30d8216c34ee88 100644
+index c43f40f699818032511714cd468e894a432a35bd..f549bac30ea5e42d99a8920d305fe33748dc84a9 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -1364,6 +1364,26 @@ public interface Server extends PluginMessageRecipient {
+@@ -1415,6 +1415,26 @@ public interface Server extends PluginMessageRecipient {
              throw new UnsupportedOperationException("Not supported yet.");
          }
  
@@ -3377,10 +3377,10 @@ index 2a145d851ce30360aa39549745bd87590c034584..00000000000000000000000000000000
 -    // Spigot end
 -}
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 7d2e96fa96f5c4c5dbe97113a5e1b9cb59e09ac6..edf4623a831442e1f06daabc402a3f32610dd519 100644
+index 7d5236e39a74fd76b626e5f9c8f76c8fbb99439f..6c910e09eda6f4f08226ccc75189171015a72b85 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -1395,7 +1395,14 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -1414,7 +1414,14 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
           */
          public void sendMessage(@NotNull net.md_5.bungee.api.ChatMessageType position, @Nullable UUID sender, @NotNull net.md_5.bungee.api.chat.BaseComponent... components) {
              throw new UnsupportedOperationException("Not supported yet.");

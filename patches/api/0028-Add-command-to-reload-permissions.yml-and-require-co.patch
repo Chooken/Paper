@@ -6,10 +6,10 @@ Subject: [PATCH] Add command to reload permissions.yml and require confirm to
 
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 8cf060e7f0a96d5b51abe57c565cdc8e9f3f5b3a..d896d9508faa53aa6f6c036f99a134a5db0f4722 100644
+index d2c98a9e670bb5202b6db0a1be8aa2b78328da91..9ba12077dfbdd99cbb269dfcffc09dc9e325bae3 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -1776,6 +1776,13 @@ public final class Bukkit {
+@@ -1831,6 +1831,13 @@ public final class Bukkit {
      public static org.bukkit.command.CommandMap getCommandMap() {
          return server.getCommandMap();
      }
@@ -24,10 +24,10 @@ index 8cf060e7f0a96d5b51abe57c565cdc8e9f3f5b3a..d896d9508faa53aa6f6c036f99a134a5
  
      @NotNull
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 5dd51e88dc2d9b7338afaa594efe1bddb17cc3ec..1b34e57d9c35d2228f36d52d44c2e55343d66c9d 100644
+index 5ae4b3c4a20fd8fd727efbfe7b721c9b365b87a6..414a24197256c5a27e9e854a96428ed2aa81f60c 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -1569,4 +1569,6 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
+@@ -1620,4 +1620,6 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
      @NotNull
      Spigot spigot();
      // Spigot end
