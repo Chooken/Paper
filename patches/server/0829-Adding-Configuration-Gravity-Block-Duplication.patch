@@ -1,0 +1,116 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: chook <joshuawereszczuk@gmail.com>
+Date: Wed, 8 Dec 2021 12:29:52 +1000
+Subject: [PATCH] Adding Configuration Gravity Block Duplication
+
+
+diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
+index cd918cec00d8202252af0d20b1a8891371c538e3..c216afcdf74ec888f792f1570b6efe839927f170 100644
+--- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
++++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
+@@ -480,6 +480,17 @@ public class PaperConfig {
+         allowBlockPermanentBreakingExploits = getBoolean("settings.unsupported-settings.allow-permanent-block-break-exploits", allowBlockPermanentBreakingExploits);
+     }
+ 
++    public static boolean allowGravityBlockDupelicationExploits = true;
++    private static void allowGravityBlockDupelicationExploits() {
++        if (config.contains("allow-gravity-block-dupelication-exploits")) {
++            allowBlockPermanentBreakingExploits = config.getBoolean("allow-gravity-block-dupelication-exploits", false);
++            config.set("allow-gravity-block-dupelication-exploits", null);
++        }
++
++        config.set("settings.sandpaper-settings.allow-gravity-block-dupelication-exploits-readme", "This setting controls if players should be able to use gravity block dupelication exploits using end portals.");
++        allowBlockPermanentBreakingExploits = getBoolean("settings.unsupported-settings.allow-gravity-block-dupelication-exploits", allowGravityBlockDupelicationExploits);
++    }
++
+     public static boolean consoleHasAllPermissions = false;
+     private static void consoleHasAllPermissions() {
+         consoleHasAllPermissions = getBoolean("settings.console-has-all-permissions", consoleHasAllPermissions);
+diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
+index 22c1699a94c9ee1d0baa0eea3f30718cb433d52f..f3b94043411da82d53672f5a15c0618b920ded83 100644
+--- a/src/main/java/net/minecraft/world/entity/Entity.java
++++ b/src/main/java/net/minecraft/world/entity/Entity.java
+@@ -389,9 +389,13 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, i
+     }
+     // Paper end - optimise entity tracking
+     // Paper start - make end portalling safe
+-    public BlockPos portalBlock;
+-    public ServerLevel portalWorld;
+-    public void tickEndPortal() {
++    // SandPaper start - Making Configurable
++
++    if (!com.destroystokyo.paper.PaperConfig.allowGravityBlockDupelicationExploits)
++    {
++        public BlockPos portalBlock;
++        public ServerLevel portalWorld;
++        public void tickEndPortal () {
+         BlockPos pos = this.portalBlock;
+         ServerLevel world = this.portalWorld;
+         this.portalBlock = null;
+@@ -412,10 +416,11 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, i
+         event.callEvent();
+ 
+         if (this instanceof ServerPlayer) {
+-            ((ServerPlayer)this).changeDimension(worldserver, PlayerTeleportEvent.TeleportCause.END_PORTAL);
++            ((ServerPlayer) this).changeDimension(worldserver, PlayerTeleportEvent.TeleportCause.END_PORTAL);
+             return;
+         }
+-        this.teleportTo(worldserver, null);
++            this.teleportTo(worldserver, null);
++        }
+     }
+     // Paper end - make end portalling safe
+ 
+@@ -2746,7 +2751,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, i
+             }
+ 
+             this.processPortalCooldown();
+-            //this.tickEndPortal(); Paper - make end portalling safe
++            if (!com.destroystokyo.paper.PaperConfig.allowGravityBlockDupelicationExploits) { this.tickEndPortal(); } // SandPaper making sand dupe configurable
+         }
+     }
+ 
+diff --git a/src/main/java/net/minecraft/world/entity/item/FallingBlockEntity.java b/src/main/java/net/minecraft/world/entity/item/FallingBlockEntity.java
+index 0c94b4cb6ee0c3dffe0b67a2291d0160ae0ef96f..96c56704b8295f350e9fd0291cd18909b63a78d5 100644
+--- a/src/main/java/net/minecraft/world/entity/item/FallingBlockEntity.java
++++ b/src/main/java/net/minecraft/world/entity/item/FallingBlockEntity.java
+@@ -110,11 +110,15 @@ public class FallingBlockEntity extends Entity {
+ 
+     @Override
+     public void tick() {
+-        // Paper start - fix sand duping
+-        if (this.isRemoved()) {
+-            return;
++        // SandPaper start - configureable gravity dupe
++        if (!com.destroystokyo.paper.PaperConfig.allowGravityBlockDupelicationExploits) {
++            // Paper start - fix sand duping
++            if (this.isRemoved()) {
++                return;
++            }
++            // Paper end - fix sand duping
+         }
+-        // Paper end - fix sand duping
++        // SandPaper end - configureable gravity dupe
+         if (this.blockState.isAir()) {
+             this.discard();
+         } else if (this.level.isClientSide && this.removeAtMillis > 0L) {
+@@ -152,11 +156,15 @@ public class FallingBlockEntity extends Entity {
+ 
+             this.move(MoverType.SELF, this.getDeltaMovement());
+ 
+-            // Paper start - fix sand duping
+-            if (this.isRemoved()) {
+-                return;
++            // SandPaper start - configureable gravity dupe
++            if (!com.destroystokyo.paper.PaperConfig.allowGravityBlockDupelicationExploits) {
++                // Paper start - fix sand duping
++                if (this.isRemoved()) {
++                    return;
++                }
++                // Paper end - fix sand duping
+             }
+-            // Paper end - fix sand duping
++            // SandPaper end - configureable gravity dupe
+ 
+             // Paper start - Configurable EntityFallingBlock height nerf
+             if (this.level.paperConfig.fallingBlockHeightNerf != 0 && this.getY() > this.level.paperConfig.fallingBlockHeightNerf) {
