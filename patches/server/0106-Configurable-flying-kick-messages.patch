@@ -21,10 +21,10 @@ index 6c13fe725ca2b2a6f0f375b80f6c2cb643b9913d..5e23ff0c5e44427a996281ae42fc12c2
 +    }
  }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 9b24ddf170e00e60391a240686e6767e19b04fd3..73293dff5dac52c0737bbda65caea3a1e0cc4acd 100644
+index faeb99b93ead7c444fc23d542c7e2b11055ebfba..6de1ea5c10f335a39f73033998629068cf93a539 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -300,7 +300,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -302,7 +302,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
          if (this.clientIsFloating && !this.player.isSleeping()) {
              if (++this.aboveGroundTickCount > 80) {
                  ServerGamePacketListenerImpl.LOGGER.warn("{} was kicked for floating too long!", this.player.getName().getString());
@@ -33,7 +33,7 @@ index 9b24ddf170e00e60391a240686e6767e19b04fd3..73293dff5dac52c0737bbda65caea3a1
                  return;
              }
          } else {
-@@ -319,7 +319,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -321,7 +321,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
              if (this.clientVehicleIsFloating && this.player.getRootVehicle().getControllingPassenger() == this.player) {
                  if (++this.aboveGroundVehicleTickCount > 80) {
                      ServerGamePacketListenerImpl.LOGGER.warn("{} was kicked for floating a vehicle too long!", this.player.getName().getString());

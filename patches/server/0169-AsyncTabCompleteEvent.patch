@@ -14,10 +14,10 @@ completion, such as offline players.
 Also adds isCommand and getLocation to the sync TabCompleteEvent
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 898846546819ff71586cc1e038140047d2797e33..c795469d3221505faeabb5d06f35549c161f4f48 100644
+index ed2cbef0a1211fe5330d4d059657c7460fc2bc8d..b64bf84751e0437e26fcebdc35dd53069b9f2551 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -701,10 +701,10 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -703,10 +703,10 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
  
      @Override
      public void handleCustomCommandSuggestions(ServerboundCommandSuggestionPacket packet) {
@@ -30,7 +30,7 @@ index 898846546819ff71586cc1e038140047d2797e33..c795469d3221505faeabb5d06f35549c
              return;
          }
          // CraftBukkit end
-@@ -714,12 +714,35 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -716,12 +716,35 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
              stringreader.skip();
          }
  
@@ -72,10 +72,10 @@ index 898846546819ff71586cc1e038140047d2797e33..c795469d3221505faeabb5d06f35549c
  
      @Override
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 0c1378bbee14a9fc3c81288e963e2709238830ae..57feb89a7dffb14f1e006b62e131604bd67797f9 100644
+index def56e6c17d6e2efddcdca22e391f11b2de58966..70c12364dad4426a55e3a79c642af9be4d9212d7 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -2057,7 +2057,7 @@ public final class CraftServer implements Server {
+@@ -2072,7 +2072,7 @@ public final class CraftServer implements Server {
              offers = this.tabCompleteChat(player, message);
          }
  
